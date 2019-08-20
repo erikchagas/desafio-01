@@ -4,7 +4,15 @@ const server = express();
 
 const projects = [{ id: "1", title: 'Novo projeto', tasks: [] }];
 
+let countReq = 0;
+
 server.use(express.json());
+
+server.use((req, res, next) => {
+  countReq += 1;
+  console.log(`Requisição de número ${countReq}`);
+  next();
+});
 
 function checkIfProjectExists(req, res, next){
   const { id } = req.params;
