@@ -5,6 +5,9 @@
   "license": "MIT",
   "repository": "https://github.com/erikchagas/desafio-01.git",
   "author": "Erik Chagas <erikchagas00@gmail.com>",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
   "dependencies": {
     "express": "^4.17.1"
   },
