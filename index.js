@@ -2,10 +2,12 @@ const express = require('express');
 
 const server = express();
 
+const projects = [{ id: "1", title: 'Novo projeto', tasks: [] }];
+
 server.use(express.json());
 
 server.get('/projects', (req, res) => {
-  return res.json({message: 'It works!'});
+  return res.json(projects);
 });
 
 //http://localhost:3333/
