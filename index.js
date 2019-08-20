@@ -6,6 +6,18 @@ const projects = [{ id: "1", title: 'Novo projeto', tasks: [] }];
 
 server.use(express.json());
 
+function checkIfProjectExists(req, res, next){
+  const { id } = req.params;
+
+  const index = projects.findIndex(element => element.id === id);
+
+  if (index < 0){
+    return res.status(400).json({error: 'Project does not exists!'});
+  }
+
+  return next();
+}
+
 server.get('/projects', (req, res) => {
   return res.json(projects);
 });
@@ -22,7 +34,7 @@ server.post('/projects', (req, res) => {
   return res.json(projects);
 });
 
-server.put('/projects/:id', (req, res) => {
+server.put('/projects/:id', checkIfProjectExists, (req, res) => {
   const { id } = req.params;
   const { title } = req.body;
 
@@ -33,7 +45,7 @@ server.put('/projects/:id', (req, res) => {
   return res.json(projects);
 });
 
-server.delete('/projects/:id', (req, res) => {
+server.delete('/projects/:id', checkIfProjectExists, (req, res) => {
   const { id } = req.params;
 
   const index = projects.findIndex(element => element.id === id);
@@ -43,7 +55,7 @@ server.delete('/projects/:id', (req, res) => {
   return res.json();
 });
 
-server.post('/projects/:id/tasks', (req, res) => {
+server.post('/projects/:id/tasks', checkIfProjectExists, (req, res) => {
   const { id } = req.params;
   const { title } = req.body;
 
