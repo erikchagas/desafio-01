@@ -22,5 +22,16 @@ server.post('/projects', (req, res) => {
   return res.json(projects);
 });
 
+server.put('/projects/:id', (req, res) => {
+  const { id } = req.params;
+  const { title } = req.body;
+
+  const index = projects.findIndex(element => element.id === id);
+
+  projects[index].title = title;
+
+  return res.json(projects);
+});
+
 //http://localhost:3333/
 server.listen(3333);
