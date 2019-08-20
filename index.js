@@ -33,5 +33,15 @@ server.put('/projects/:id', (req, res) => {
   return res.json(projects);
 });
 
+server.delete('/projects/:id', (req, res) => {
+  const { id } = req.params;
+
+  const index = projects.findIndex(element => element.id === id);
+
+  projects.splice(index, 1);
+
+  return res.json();
+});
+
 //http://localhost:3333/
 server.listen(3333);
